@@ -10,16 +10,25 @@
 # -----------------------------------------
 RewriteEngine On
 #large cookie, large image
-RewriteCond %{HTTP_COOKIE} rwd-screensize=large
+RewriteCond %{HTTP_COOKIE} rwd-screensize=large2x$
+RewriteCond %{QUERY_STRING} large2x=([^&]+)
+RewriteRule .* %1 [L]
+RewriteCond %{HTTP_COOKIE} rwd-screensize=large(2x)?$
 RewriteCond %{QUERY_STRING} large=([^&]+)
 RewriteRule .* %1 [L]
 #medium cookie, medium image
-RewriteCond %{HTTP_COOKIE} rwd-screensize=medium
+RewriteCond %{HTTP_COOKIE} rwd-screensize=(medium|large)2x$
+RewriteCond %{QUERY_STRING} medium2x=([^&]+)
+RewriteRule .* %1 [L]
+RewriteCond %{HTTP_COOKIE} rwd-screensize=(medium|large)(2x)?$
 RewriteCond %{QUERY_STRING} medium=([^&]+)
 RewriteRule .* %1 [L]
-#large cookie, medium image
-RewriteCond %{HTTP_COOKIE} rwd-screensize=large
-RewriteCond %{QUERY_STRING} medium=([^&]+)
+#small cookie, small image
+RewriteCond %{HTTP_COOKIE} rwd-screensize=small2x$
+RewriteCond %{QUERY_STRING} small2x=([^&]+)
+RewriteRule .* %1 [L]
+RewriteCond %{HTTP_COOKIE} rwd-screensize=small$
+RewriteCond %{QUERY_STRING} small=([^&]+)
 RewriteRule .* %1 [L]
 
 # -----------------------------------------

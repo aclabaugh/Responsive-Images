@@ -23,12 +23,15 @@
 		
 		// Path for cookies on domain
  		cookiePath = def.cookiePath || "/",
+ 		
+ 		// Lookup Device Pixel Ratio
+ 		cookieRetina = win.devicePixelRatio > 1 ? '2x' : '',
 		
 		//record width cookie for subsequent loads
 		recordRes = (function(){
 			var date = new Date();
 		    date.setTime( date.getTime() + cookieAge );
-		    doc.cookie = cookieName + "=" + cookieValue + ";" +
+		    doc.cookie = cookieName + "=" + cookieValue + cookieRetina + ";" +
 				"expires=" + date.toGMTString() + ";" +
 				(cookiePath ? "path=" + cookiePath + ";" : "" ) +
 				( cookieDomain ? "domain=" + cookieDomain + ";" : "");
